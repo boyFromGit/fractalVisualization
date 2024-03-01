@@ -1,0 +1,61 @@
+#canvas {
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#container-canvas {
+    border: 2px solid red;
+    text-align: center;
+    min-width: 520px;
+}
+
+#container-main {
+    margin-top: 20px;
+}
+
+#container-fractal-selector{
+    margin-bottom: 25px;
+}
+
+#container-julia-value-selector{
+    margin-bottom: 25px;
+}
+
+#container-slider {
+    margin-bottom: 25px;
+    /* border: 2px solid beige; */
+}
+
+h1 {
+    text-align: center;
+}
+
+.container-settings {
+    border: 2px solid beige;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.container-swap-colors-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-picker {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.color-picker .form-label {
+    margin-bottom: 5px;
+}
+
+.disable-scrollbar{
+    overflow: hidden;
+}
