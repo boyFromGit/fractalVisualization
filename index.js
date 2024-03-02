@@ -4,7 +4,7 @@
 // html elements:
 //
 const canvas = document.getElementById('canvas');
-const gl = canvas.getContext("webgl");
+const gl = canvas.getContext('webgl');
 let ctx = undefined;
 const recursionDepthSlider = document.getElementById("recursion-depth-slider");
 const fractalSelector = document.getElementById("fractal-selector");
@@ -27,6 +27,11 @@ let maxIterations = recursionDepthSlider.value;
 let zoomingIn = true;
 let zoomInFactor = 0.9;
 let zoomOutFactor = 1.1;
+
+let isDragging = false;
+const dragFactor = 0.5;
+let lastDragPosX;
+let lastDragPosY;
 
 let selectedJuliaSetValues = 6;
 let juliaSetValues = [
@@ -225,13 +230,44 @@ function zoom(event) {
 
     // convert click position to complex plane coordinates
     const clickA = map(clickX, 0, canvas.width, minX, maxX);
-    const clickB = map(clickY, 0, canvas.height, maxY, minY);
+    let clickB;
+    if (currentMainFunction == 1) {
+        clickB = map(clickY, 0, canvas.height, maxY, minY);
+    }
+    else {
+        clickB = map(clickY, 0, canvas.height, minY, maxY);
+    }
 
     // calculate the new boundaries based on the mouse position
     minX = clickA - (clickA - minX) * zoomFactor;
     maxX = clickA + (maxX - clickA) * zoomFactor;
     minY = clickB - (clickB - minY) * zoomFactor;
     maxY = clickB + (maxY - clickB) * zoomFactor;
+}
+
+function drag(event) {
+    // get click position
+    const bounds = canvas.getBoundingClientRect();
+    const clickX = event.clientX - bounds.left;
+    const clickY = event.clientY - bounds.top;
+
+    // convert click position to complex plane coordinates
+    const clickA = map(clickX, 0, canvas.width, minX, maxX);
+    const clickB = map(clickY, 0, canvas.height, minY, maxY);
+
+    // calculate vector between current and last mouse position
+    const deltaX = clickA - lastDragPosX;
+    const deltaY = clickB - lastDragPosY;
+
+    // calculate the new boundaries based on the mouse position
+    minX = minX - deltaX * dragFactor;
+    maxX = maxX - deltaX * dragFactor;
+    minY = minY + deltaY * dragFactor;
+    maxY = maxY + deltaY * dragFactor;
+
+    // Update current click position
+    lastDragPosX = clickA;
+    lastDragPosY = clickB;
 }
 
 //
@@ -451,9 +487,9 @@ function setUpEventHandlers() {
 
     window.addEventListener("load", function () {
         fractalSelector.value = selectedFractal;
+        juliaValueSelector.value = selectedJuliaSetValues;
         mainFunctions[currentMainFunction]();
     });
-    // window.addEventListener("resize", mainFunctions[currentMainFunction]());
 
     fractalSelector.addEventListener("input", function () {
         console.log(fractalSelector.value);
@@ -513,22 +549,12 @@ function setUpEventHandlers() {
 
     canvas.addEventListener("mouseleave", function () {
         enableScrolling();
-    });
-
-    // user can click to zoom in and out
-    canvas.addEventListener("click", function (event) {
-        if (event.shiftKey) {
-            zoomingIn = false;
-        }
-        else {
-            zoomingIn = true;
-        }
-        zoom(event);
-        mainFunctions[currentMainFunction]();
+        isDragging = false;
     });
 
     // user can zoom with scrollwheel
     canvas.addEventListener("wheel", function (event) {
+        event.preventDefault();
         if (event.deltaY > 0) {
             zoomingIn = false;
         }
@@ -537,6 +563,31 @@ function setUpEventHandlers() {
         }
         zoom(event);
         mainFunctions[currentMainFunction]();
+    });
+
+    canvas.addEventListener("mousedown", function (event) {
+        console.log("mousedown")
+        isDragging = true;
+        const bounds = canvas.getBoundingClientRect();
+        const clickX = event.clientX - bounds.left;
+        const clickY = event.clientY - bounds.top;
+
+        // convert click position to complex plane coordinates
+        lastDragPosX = map(clickX, 0, canvas.width, minX, maxX);
+        lastDragPosY = map(clickY, 0, canvas.height, minY, maxY);
+    });
+
+    canvas.addEventListener("mousemove", function (event) {
+        if (isDragging) {
+            drag(event);
+            mainFunctions[currentMainFunction]();
+            console.log("mousemove")
+        }
+    });
+
+    canvas.addEventListener("mouseup", function (event) {
+        console.log("mouseup")
+        isDragging = false;
     });
 }
 

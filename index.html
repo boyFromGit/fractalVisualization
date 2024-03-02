@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fractals</title>
-    <link rel="icon" type="image/x-icon" href="./img/favicon.jpeg">
+    <link rel="icon" type="image/x-icon" href="./img/js02.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/darkly/bootstrap.min.css">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -18,8 +18,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <!-- <script defer src="./index.js"></script> -->
-    <script defer src="./webgl_fast.js"></script>
-    User
+    <script defer src="./index.js"></script>
     <script id="vertex-shader-2d" type="x-shader/x-vertex">
         //#extension GL_ARB_gpu_shader_fp64 : enable
         // an attribute will receive data from a buffer
@@ -116,15 +115,22 @@
 
 <body>
     <div class="container-fluid">
-        <h1>A Simple Fractal Simulation</h1>
+        <h1 class="mt-4">Fractal Visualization</h1>
         <div class="row" id="container-main">
-            <div class="container-settings col">
-                <p></p>
+            <div class="container-settings col-md">
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             </div>
             <div class="col-md-5" id="container-canvas">
                 <canvas id="canvas" width="500" height="500"></canvas>
             </div>
-            <div class="container-settings col">
+            <div class="container-settings col-md">
                 <div id="container-fractal-selector">
                     <label for="fractal-selector" class="form-label">Choose Fractal</label>
                     <select id="fractal-selector" class="form-select" aria-label="Choose Fractal">
@@ -150,7 +156,7 @@
                 </div>
                 <div id="container-slider">
                     <label for="recursion_depth_slider" class="form-label">Recursion Depth</label>
-                    <input type="range" class="form-range" min="5" max="1000" id="recursion-depth-slider">
+                    <input type="range" class="form-range" min="5" max="1500" id="recursion-depth-slider">
                 </div>
                 <div class="row">
                     <div class="col color-picker">

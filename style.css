@@ -5,9 +5,9 @@
 }
 
 #container-canvas {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     text-align: center;
-    min-width: 520px;
+    min-width: 550px;
 }
 
 #container-main {
@@ -32,23 +32,18 @@ h1 {
 }
 
 .container-settings {
-    border: 2px solid beige;
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.container-swap-colors-button{
+    /* border: 2px solid beige; */
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.color-picker {
-    display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+.color-picker {
     margin-bottom: 25px;
 }
 
