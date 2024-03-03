@@ -515,6 +515,10 @@ function setUpEventHandlers() {
 
     juliaValueSelector.addEventListener("input", function () {
         selectedJuliaSetValues = juliaValueSelector.value;
+        minX = minXjuliaSet;
+        maxX = maxXjuliaSet;
+        minY = minYjuliaSet;
+        maxY = maxYjuliaSet;
         mainFunctions[currentMainFunction]();
     });
 
