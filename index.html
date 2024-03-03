@@ -118,14 +118,18 @@
         <h1 class="mt-4">Fractal Visualization</h1>
         <div class="row" id="container-main">
             <div class="container-settings col-md">
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>rgren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <h3>Explanation</h3>
+                <p>
+                    This is a visualization for the Mandelbrot- and Juliaset.
+                    You can play with the settings on the right side and directly see the changes made in the canvas.
+                    You can also zoom using the mousewheel or a trackpad and drag the image however you want with the left click.
+                    Have fun exploring :)
+                </p>
+                <p>
+                    I used WebGL for rendering these fractals because it would be way to slow otherwise. 
+                    Sadly WebGL currently does only support 32-Bit floating types on most machines which results
+                    in the image being pixely when zooming in after a while.
+                </p>
             </div>
             <div class="col-md-5" id="container-canvas">
                 <canvas id="canvas" width="500" height="500"></canvas>
@@ -155,7 +159,7 @@
                     </select>
                 </div>
                 <div id="container-slider">
-                    <label for="recursion_depth_slider" class="form-label">Recursion Depth</label>
+                    <label for="recursion_depth_slider" class="form-label">Iterations</label>
                     <input type="range" class="form-range" min="5" max="1500" id="recursion-depth-slider">
                 </div>
                 <div class="row">

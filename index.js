@@ -29,7 +29,7 @@ let zoomInFactor = 0.9;
 let zoomOutFactor = 1.1;
 
 let isDragging = false;
-const dragFactor = 0.5;
+const dragFactor = 0.75;
 let lastDragPosX;
 let lastDragPosY;
 
@@ -104,7 +104,7 @@ fractalFunctions.push(juliaSet);
 
 const mainWebGL = function () {
 
-    console.log("mainWebGL");
+    // console.log("mainWebGL");
 
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
@@ -160,16 +160,15 @@ const mainWebGL = function () {
 
     // Draw the scene
     drawScene(gl, programInfo, buffers);
-    console.log(gl.getError());
+    // console.log(gl.getError());
 }
 
 const mainNoWebGL = function () {
 
-    console.log("mainNoWebGL")
+    // console.log("mainNoWebGL")
 
     // clear old canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
 
     // iterate through each pixel in the canvas
     for (let i = 0; i < canvas.width; i++) {
@@ -266,8 +265,10 @@ function drag(event) {
     maxY = maxY + deltaY * dragFactor;
 
     // Update current click position
-    lastDragPosX = clickA;
-    lastDragPosY = clickB;
+    const clickAnew = map(clickX, 0, canvas.width, minX, maxX);
+    const clickBnew = map(clickY, 0, canvas.height, minY, maxY);
+    lastDragPosX = clickAnew;
+    lastDragPosY = clickBnew;
 }
 
 //
@@ -492,7 +493,6 @@ function setUpEventHandlers() {
     });
 
     fractalSelector.addEventListener("input", function () {
-        console.log(fractalSelector.value);
         selectedFractal = parseInt(fractalSelector.value);
         if (selectedFractal === 0) {
             containerJuliaValueSelector.hidden = true;
@@ -514,7 +514,6 @@ function setUpEventHandlers() {
     });
 
     juliaValueSelector.addEventListener("input", function () {
-        console.log(juliaValueSelector.value);
         selectedJuliaSetValues = juliaValueSelector.value;
         mainFunctions[currentMainFunction]();
     });
@@ -566,7 +565,6 @@ function setUpEventHandlers() {
     });
 
     canvas.addEventListener("mousedown", function (event) {
-        console.log("mousedown")
         isDragging = true;
         const bounds = canvas.getBoundingClientRect();
         const clickX = event.clientX - bounds.left;
@@ -581,12 +579,10 @@ function setUpEventHandlers() {
         if (isDragging) {
             drag(event);
             mainFunctions[currentMainFunction]();
-            console.log("mousemove")
         }
     });
 
     canvas.addEventListener("mouseup", function (event) {
-        console.log("mouseup")
         isDragging = false;
     });
 }
