@@ -196,18 +196,22 @@ const mainNoWebGL = function () {
 mainFunctions.push(mainNoWebGL);
 mainFunctions.push(mainWebGL);
 
-// Only use webGL if avaiable
-if (gl) {
-    currentMainFunction = 1;
-    mainWebGL();
-}
-else {
-    alert(
-        "Unable to initialize WebGL. Your browser or machine may not support it. Continuing without WebGL.",
-    );
-    currentMainFunction = 0;
-    ctx = canvas.getContext("2d");
-    mainNoWebGL();
+function startVisualisation() {
+
+    resizeCanvas();
+
+    if (gl) {
+        currentMainFunction = 1;
+        mainWebGL();
+    }
+    else {
+        alert(
+            "Unable to initialize WebGL. Your browser or machine may not support it. Continuing without WebGL.",
+        );
+        currentMainFunction = 0;
+        ctx = canvas.getContext("2d");
+        mainNoWebGL();
+    }
 }
 
 setUpEventHandlers();
@@ -344,6 +348,19 @@ function hexToRgb(hex) {
 // map a value from one range to another range
 function map(value, minInput, maxInput, minOutput, maxOutput) {
     return minOutput + (value - minInput) / (maxInput - minInput) * (maxOutput - minOutput);
+}
+
+function resizeCanvas() {
+
+    // const dpr = window.devicePixelRatio || 1;
+    const width = canvas.clientWidth;
+
+    canvas.width = width;
+    canvas.height = width;
+
+    // if (ctx) {
+    //     ctx.scale(dpr, dpr);
+    // }
 }
 
 //
@@ -589,6 +606,12 @@ function setUpEventHandlers() {
     canvas.addEventListener("mouseup", function (event) {
         isDragging = false;
     });
+
+    window.addEventListener("resize", function (event) {
+
+        resizeCanvas();
+        mainFunctions[currentMainFunction]();
+    })
 }
 
 function disableScrolling() {
@@ -598,3 +621,5 @@ function disableScrolling() {
 function enableScrolling() {
     document.body.classList.remove("disable-scrollbar");
 }
+
+startVisualisation();

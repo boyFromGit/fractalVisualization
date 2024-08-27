@@ -2,23 +2,32 @@
     border: 1px solid #000000;
     border-radius: 5px;
     background-color: white;
+    width: calc(100vw / 2.5);
+    height: calc(100vw / 2.5);
+}
+
+@media (max-width: 767px) {
+    #canvas {
+        width: calc(100vw / 1.5);
+        height: calc(100vw / 1.5);
+    }
 }
 
 #container-canvas {
     /* border: 2px solid red; */
     text-align: center;
-    min-width: 550px;
+    /* min-width: 550px; */
 }
 
 #container-main {
     margin-top: 20px;
 }
 
-#container-fractal-selector{
+#container-fractal-selector {
     margin-bottom: 25px;
 }
 
-#container-julia-value-selector{
+#container-julia-value-selector {
     margin-bottom: 25px;
 }
 
@@ -29,6 +38,20 @@
 
 h1 {
     text-align: center;
+}
+
+.settings-right {
+    text-align: center;
+    padding-bottom: 10%;
+}
+
+div>p {
+    padding-left: 12%;
+    padding-right: 12%;
+}
+
+.text {
+    padding-bottom: 5%;
 }
 
 .container-settings {
@@ -51,6 +74,6 @@ h1 {
     margin-bottom: 5px;
 }
 
-.disable-scrollbar{
+.disable-scrollbar {
     overflow: hidden;
 }
